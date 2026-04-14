@@ -1,4 +1,5 @@
 <h1 align="center">🌤️ WeatherNow</h1>
+
 <p align="center">
   <strong>A beautifully designed, real-time weather dashboard with a dark glassmorphism UI.</strong><br/>
   Search any city worldwide, auto-detect your location, and view live weather conditions at a glance.
@@ -14,24 +15,42 @@
 
 ---
 
-## ✨ Features
+## 📸 Screenshots
 
-- 🌡️ **Current Weather** — Temperature, feels like, humidity, wind speed, visibility, and pressure
-- 📅 **5-Day Forecast** — Daily high/low with weather icons
-- 📍 **Geolocation** — Auto-detect current location with one click
-- 🌍 **City Search** — Search any city with a live suggestion dropdown
-- 🔄 **°C / °F Toggle** — Switch temperature units instantly
-- 🎨 **Glassmorphism UI** — Dark theme with animated gradient background orbs
-- 🚀 **Demo Mode** — Works out of the box without an API key (pre-loaded cities)
-- 📱 **Responsive Design** — Fully optimized for mobile and desktop
+### 🏠 Homepage — Live Weather Dashboard (Karachi, °C)
+> The app auto-loads Karachi weather on startup in demo mode. Shows temperature, weather icon, humidity, wind speed, visibility and more — all inside a sleek dark glassmorphism card with animated background orbs.
+
+![WeatherNow Homepage — Karachi 34°C with dark glassmorphism UI](Screenshots/HOMEPAGE.png)
 
 ---
 
-## 🖥️ Live Preview
+### 🔁 Temperature Unit Switch — Fahrenheit Mode
+> One click on the °F toggle instantly converts all temperatures. Here Karachi's 34°C becomes 93°F, feels like 100°F — with all 6 stat cards (Humidity, Wind, Visibility, Pressure, Sunrise, Sunset) fully visible.
 
-> Open `index.html` in your browser — demo mode loads Karachi weather by default.
->
-> **Quick cities:** Karachi · Lahore · London · New York · Tokyo · Dubai
+![WeatherNow switched to Fahrenheit — showing 93°F for Karachi](Screenshots/SWITCH_TO%20_FRENHITE.png)
+
+---
+
+## ✨ Features
+
+| Feature | Description |
+|---|---|
+| 🌡️ Current Weather | Temp, feels like, humidity, wind, visibility, pressure |
+| 📅 5-Day Forecast | Daily high/low with animated weather icons |
+| 📍 Geolocation | Auto-detect current location with one click |
+| 🔍 City Search | Search any city with live suggestion dropdown |
+| 🔄 °C / °F Toggle | Switch temperature units instantly — no reload |
+| 🎨 Glassmorphism UI | Dark theme with animated gradient background orbs |
+| 🚀 Demo Mode | Works out of the box — no API key needed |
+| 📱 Responsive | Fully optimized for both mobile and desktop |
+
+---
+
+## 🏙️ Demo Cities Available
+
+> In demo mode, try these cities from the quick-pick pills:
+
+`Karachi` · `Lahore` · `London` · `New York` · `Tokyo` · `Dubai`
 
 ---
 
@@ -39,12 +58,11 @@
 
 1. Get a **free API key** at [openweathermap.org](https://openweathermap.org/api)
 2. Open `script.js`
-3. Replace `YOUR_API_KEY_HERE` with your key
-4. Set `DEMO_MODE = false`
+3. Replace `YOUR_API_KEY_HERE` with your key and set `DEMO_MODE = false`
 
 ```js
-const API_KEY   = 'your_key_here';   // ← paste your key
-const DEMO_MODE = false;             // ← disable demo mode
+const API_KEY   = 'your_actual_key_here';
+const DEMO_MODE = false;
 ```
 
 ---
@@ -53,10 +71,10 @@ const DEMO_MODE = false;             // ← disable demo mode
 
 | Technology | Purpose |
 |---|---|
-| HTML5 | Structure & Semantics |
-| CSS3 | Glassmorphism styling, animations, responsive layout |
-| JavaScript (ES6+) | Weather logic, API integration, geolocation |
-| OpenWeatherMap API | Live weather & forecast data |
+| HTML5 | Semantic structure & accessibility |
+| CSS3 | Glassmorphism styling, blob animations, responsive grid |
+| JavaScript ES6+ | Weather logic, API calls, geolocation, unit conversion |
+| OpenWeatherMap API | Live weather + 5-day forecast data |
 
 ---
 
@@ -64,9 +82,12 @@ const DEMO_MODE = false;             // ← disable demo mode
 
 ```
 weathernow-app/
-├── index.html    # App structure
-├── style.css     # Dark glassmorphism theme
-└── script.js     # Weather logic, demo data & API integration
+├── index.html        # App structure
+├── style.css         # Dark glassmorphism theme
+├── script.js         # Weather logic, demo data & API integration
+└── Screenshots/
+    ├── HOMEPAGE.png
+    └── SWITCH_TO _FRENHITE.png
 ```
 
 ---
@@ -78,19 +99,16 @@ weathernow-app/
 git clone https://github.com/qasim-safi/weathernow-app.git
 cd weathernow-app
 
-# Open in browser
+# Open in browser — no build tools needed
 open index.html
-# Or just double-click index.html
 ```
-
-No build tools or dependencies required. Pure HTML, CSS, and JavaScript.
 
 ---
 
 ## 👨‍💻 Developer
 
 **Qasim Safi** — BS Software Engineering Student  
-🌐 Django Web Dev | 📱 Flutter App Dev | 🐍 Python & Java  
+🌐 Django Web Dev | 📱 Flutter App Dev | 🐍 Python & Java
 
 [![GitHub](https://img.shields.io/badge/GitHub-qasim--safi-181717?style=flat-square&logo=github)](https://github.com/qasim-safi)
 
@@ -98,4 +116,4 @@ No build tools or dependencies required. Pure HTML, CSS, and JavaScript.
 
 ## 📄 License
 
-This project is licensed under the **MIT License** — feel free to use and modify it.
+MIT License — free to use, modify, and distribute.
