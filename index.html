@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="WeatherNow – A beautiful real-time weather dashboard with glassmorphism UI. Search any city or use your current location." />
+  <title>WeatherNow 🌤️ | Real-Time Weather Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Animated background orbs -->
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="container" role="main">
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">
+        <span class="brand-icon" aria-hidden="true">⛅</span>
+        <span class="brand-name">WeatherNow</span>
+      </div>
+      <div class="unit-toggle" role="group" aria-label="Temperature unit">
+        <button id="btn-c" class="unit-btn active" onclick="setUnit('C')" aria-pressed="true">°C</button>
+        <button id="btn-f" class="unit-btn" onclick="setUnit('F')" aria-pressed="false">°F</button>
+      </div>
+    </header>
+
+    <!-- Search -->
+    <div class="search-bar" role="search">
+      <div class="search-inner">
+        <svg class="search-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        <input id="cityInput" type="text" placeholder="Search city…" autocomplete="off"
+               aria-label="Search for a city"
+               onkeydown="if(event.key==='Enter')doSearch()"
+               oninput="onInputChange()" />
+        <button class="geo-btn" onclick="getGeo()" title="Use my current location" aria-label="Use my location">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/>
+          </svg>
+        </button>
+        <button class="search-btn" onclick="doSearch()" id="searchBtn">Search</button>
+      </div>
+      <ul id="dropdownList" class="dropdown hidden" role="listbox" aria-label="City suggestions"></ul>
+    </div>
+
+    <!-- Alert -->
+    <div id="alertBox" class="alert-box hidden" role="alert"></div>
+
+    <!-- Loading -->
+    <div id="loadingBox" class="loading-box hidden" aria-live="polite">
+      <div class="spinner" aria-hidden="true"></div>
+      <span>Fetching weather data…</span>
+    </div>
+
+    <!-- Main weather card -->
+    <div id="mainCard" class="main-card hidden" aria-live="polite">
+      <div class="card-top">
+        <div class="location-block">
+          <h1 id="cityName" class="city-name">—</h1>
+          <p id="countryName" class="country-name">—</p>
+          <p id="dateTime" class="date-time">—</p>
+        </div>
+        <div class="icon-block">
+          <div id="weatherIcon" class="weather-icon" aria-hidden="true">☀️</div>
+          <p id="weatherDesc" class="weather-desc">—</p>
+        </div>
+      </div>
+
+      <div class="temp-display">
+        <span id="tempVal" class="temp-val">—</span>
+        <span class="temp-unit-label" id="tempUnit">°C</span>
+      </div>
+      <p class="feels-like">Feels like <strong id="feelsLike">—</strong></p>
+
+      <div class="stats" role="list">
+        <div class="stat" role="listitem"><div class="stat-ico">💧</div><div class="stat-num" id="humidity">—</div><div class="stat-lbl">Humidity</div></div>
+        <div class="stat" role="listitem"><div class="stat-ico">💨</div><div class="stat-num" id="windSpeed">—</div><div class="stat-lbl">Wind</div></div>
+        <div class="stat" role="listitem"><div class="stat-ico">👁️</div><div class="stat-num" id="visibility">—</div><div class="stat-lbl">Visibility</div></div>
+        <div class="stat" role="listitem"><div class="stat-ico">📊</div><div class="stat-num" id="pressure">—</div><div class="stat-lbl">Pressure</div></div>
+        <div class="stat" role="listitem"><div class="stat-ico">🌅</div><div class="stat-num" id="sunrise">—</div><div class="stat-lbl">Sunrise</div></div>
+        <div class="stat" role="listitem"><div class="stat-ico">🌇</div><div class="stat-num" id="sunset">—</div><div class="stat-lbl">Sunset</div></div>
+      </div>
+    </div>
+
+    <!-- 5-Day Forecast -->
+    <div id="forecastCard" class="forecast-card hidden">
+      <h2 class="section-title">5-Day Forecast</h2>
+      <div id="forecastStrip" class="forecast-strip" role="list"></div>
+    </div>
+
+    <!-- API Notice -->
+    <div class="api-notice" id="apiNotice">
+      <span>🔑</span>
+      <span>
+        <strong>Demo Mode Active.</strong> Get a free API key from
+        <a href="https://openweathermap.org/api" target="_blank" rel="noopener">OpenWeatherMap</a>
+        and set it in <code>script.js</code> to enable live weather data.
+      </span>
+    </div>
+
+    <!-- Quick city pills -->
+    <div class="quick-cities" id="quickCities">
+      <span class="qc-label">Try:</span>
+      <button class="qc-pill" onclick="quickCity('Karachi')">Karachi</button>
+      <button class="qc-pill" onclick="quickCity('Lahore')">Lahore</button>
+      <button class="qc-pill" onclick="quickCity('London')">London</button>
+      <button class="qc-pill" onclick="quickCity('New York')">New York</button>
+      <button class="qc-pill" onclick="quickCity('Tokyo')">Tokyo</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
